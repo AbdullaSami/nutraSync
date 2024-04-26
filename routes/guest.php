@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -10,6 +11,9 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\LabRotaryController;
 use App\Http\Controllers\LabDoctorPatientController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\ReportController;
+use App\Models\Prescription;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
@@ -40,6 +44,18 @@ Route::get('show/labDoctorPatient', [LabDoctorPatientController::class,'show'] )
 Route::delete('delete/doctor/{id}', [DoctorController::class,'destroy'] );
 Route::delete('delete/patient/{id}', [PatientController::class,'destroy'] );
 Route::delete('delete/lab/{id}', [LabRotaryController::class,'destroy'] );
+
+//Analysis Post the data and Show API's
+Route::post('create/analysis',[AnalysisController::class,'store'] );
+Route::get('show/analysis',[AnalysisController::class,'show'] );
+
+//Report Post the data and Show API's
+Route::post('create/report', [ReportController::class,'store'] );
+Route::get('show/report', [ReportController::class,'show'] );
+
+//Prescription Post the data and Show API's
+Route::post('create/prescription', [PrescriptionController::class,'store'] );
+Route::get('show/prescription', [PrescriptionController::class,'show'] );
 
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])

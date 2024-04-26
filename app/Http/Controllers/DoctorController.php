@@ -38,7 +38,7 @@ class DoctorController extends Controller
         $doctor = Doctor::create([
             'doctor_id' => $request->doctor_id,
             'user_id' => $request->user_id,
-            'report' => $request->report,
+            'specialization' => $request->specialization,
             'gender' => $request->gender,
             'owner' => $request->owner,
             'clinic' => $request->clinic,

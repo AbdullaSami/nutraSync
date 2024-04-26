@@ -39,16 +39,18 @@ class LabRotaryController extends Controller
         $labPapers = $request->file('lab_papers')->getClientOriginalName();
         $request->file('lab_papers')->move(public_path('images/labPaper'), $labPapers);
 
+        $logo = $request->file('logo')->getClientOriginalName();
+        $request->file('logo')->move(public_path('images/logo'), $logo);
+
         $labRotary = LabRotary::create([
             'lab_rotary_id' => $request->lab_rotary_id,
             'user_id' => $request->user_id,
-            'analysis' => $request->analysis,
             'name' => $request->name,
             'contact_person' => $request->contact_person,
             'contact_number' => $request->contact_number,
             'tax_number' => $request->tax_number,
-            'lab_papers' => $request->lab_papers,
-            'logo' => $request->logo,
+            'lab_papers' => $labPapers,
+            'logo' => $logo,
         ]);
 
         return response()->json($labRotary, 201);

@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('doctor_id')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('report')->nullable();
             $table->enum('gender', ['male','female'])->default('male');
             $table->enum('owner', ['yes','no'])->default('no');
-            // $table->string('specialization');
+            $table->string('specialization');
             $table->string('clinic');
             $table->string('personal_id')->unique();
             $table->string('license_number');

@@ -12,7 +12,6 @@ class LabRotary extends Model
     protected $fillable = [
         'lab_rotary_id',
         'user_id',
-        'analysis',
         'name',
         'contact_person',
         'contact_number',

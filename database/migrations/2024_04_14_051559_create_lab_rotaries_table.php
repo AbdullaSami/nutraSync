@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('lab_rotary_id')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('analysis');
             $table->string('name');
             $table->string('contact_person');
             $table->string('contact_number');

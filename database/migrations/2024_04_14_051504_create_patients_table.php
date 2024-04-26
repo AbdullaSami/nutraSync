@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('personal_image')->nullable();
             $table->string('personal_id_front')->nullable();
             $table->string('personal_id_back')->nullable();
-            $table->string('prescription');
             $table->date('date_of_birth');
             $table->enum('gender', ['male','female'])->default('male');
             $table->float('height')->nullable();

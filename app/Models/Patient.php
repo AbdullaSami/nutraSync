@@ -16,7 +16,6 @@ class Patient extends Model
         'personal_image',
         'personal_id_front',
         'personal_id_back',
-        'prescription',
         'date_of_birth',
         'gender',
         'height',
