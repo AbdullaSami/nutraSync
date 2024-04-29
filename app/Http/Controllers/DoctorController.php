@@ -76,7 +76,7 @@ class DoctorController extends Controller
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
        // Handle the personal image upload
-    if ($request->hasFile('personal_image')) {
+    if ($request->personal_image!=null) {
         $personalImage = $request->file('personal_image')->getClientOriginalName();
         $request->file('personal_image')->move(public_path('images/personalImage'), $personalImage);
     } else {
@@ -84,25 +84,29 @@ class DoctorController extends Controller
     }
 
     // Handle the doctor papers upload
-    if ($request->hasFile('doctor_papers')) {
+    if ($request->doctor_papers!=null) {
         $doctorPapers = $request->file('doctor_papers')->getClientOriginalName();
         $request->file('doctor_papers')->move(public_path('images/doctorPapers'), $doctorPapers);
     } else {
         $doctorPapers = $doctor->doctor_papers;
     }
         $doctorRow = Doctor::find($request->id);
-    $doctorRow->report = $request->report;
-    $doctorRow->gender = $request->gender;
+    $doctorRow->specialization = $request->specialization;
+    $doctorRow->gender= $request->gender;
     $doctorRow->owner = $request->owner;
     $doctorRow->clinic = $request->clinic;
     $doctorRow->personal_id = $request->personal_id;
     $doctorRow->license_number = $request->license_number;
     $doctorRow->tax_number = $request->tax_number;
-    $doctorRow->doctor_papers = $doctorPapers;
-    $doctorRow->personal_image = $personalImage;
+    if ($request->doctor_papers!=null) {
+    $doctorRow->doctor_papers= $doctorPapers;
+    }
+    if ($request->personal_image!=null) {
+    $doctorRow->personal_image= $personalImage;
+    }
     $doctorRow->save();
 
-    return response()->json($doctor, 200);
+    return response()->json("Updated Successfully ", 200);
 
 
     }
@@ -125,6 +129,6 @@ class DoctorController extends Controller
     $doctor->delete();
 
     // Return a response
-    return response()->json(null, 204);
+    return response()->json("Deleted Successfully", 204);
 }
 }

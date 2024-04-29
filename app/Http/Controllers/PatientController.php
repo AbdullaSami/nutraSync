@@ -48,7 +48,6 @@ class PatientController extends Controller
             'personal_image' => $personalImage, //upload
             'personal_id_front' => $personalIdFront, //upload
             'personal_id_back' => $personalIdBack, //upload
-            'prescription' => $request->prescription,
             'date_of_birth' => $request->date_of_birth,
             'gender' => $request->gender,
             'height' => $request->height,
@@ -116,12 +115,14 @@ class PatientController extends Controller
     }
 
     $patientRow= Patient::find($request->id);
-
-        $patientRow->personal_id = $request->personal_id;
+    $patientRow->personal_id = $request->personal_id;
+    if($personalImage!=null){
         $patientRow->personal_image = $personalImage; //upload
-        $patientRow->personal_id_front = $request->personal_id_front; //upload
-        $patientRow->personal_id_back = $request->personal_id_back; //upload
-        $patientRow->prescription = $request->prescription;
+        } if ($personalIdFront!=null){
+        $patientRow->personal_id_front = $personalIdFront; //upload
+        } if($personalIdBack!=null){
+        $patientRow->personal_id_back = $personalIdBack; //upload
+        }
         $patientRow->date_of_birth = $request->date_of_birth;
         $patientRow->gender = $request->gender;
         $patientRow->height = $request->height;
@@ -132,7 +133,7 @@ class PatientController extends Controller
         $patientRow->bmi = $request->bmi;
         $patientRow->save();
 
-        return response()->json($patient, 200);
+        return response()->json("Updated Successfully", 200);
 
 
     }
@@ -155,6 +156,6 @@ class PatientController extends Controller
     $patient->delete();
 
     // Return a response
-    return response()->json(null, 204);
+    return response()->json("Deleted Successfully", 200);
 }
 }
