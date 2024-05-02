@@ -21,12 +21,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
+        $validator = Validator($request->all(), [
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'address'=>['required', 'string'],
+            'phone_number'=>['required', 'string'],
             'role' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ])
+            // validation rules here
         ]);
+
+        if ($validator->fails()) {
+            dd($validator->errors()); // dump validation errors
+        }
 
         $user = User::create([
             'name' => $request->name,
