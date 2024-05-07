@@ -37,6 +37,10 @@ Route::post('/patients/assign', [LabDoctorPatientController::class, 'assign']);
 Route::get('show/doctors', [DoctorController::class, 'show'] );
 Route::get('show/patients', [PatientController::class, 'show'] );
 Route::get('show/labs', [LabRotaryController::class, 'show'] );
+
+//Get the data of one patient the the table
+Route::get('show/patient/{patient_id}', [PatientController::class, 'showPatient'] );
+
 //Get the data of the relations of the three entity's
 Route::get('show/labDoctorPatient', [LabDoctorPatientController::class,'show'] );
 
