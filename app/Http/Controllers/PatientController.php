@@ -31,16 +31,22 @@ class PatientController extends Controller
      */
     public function store(StorePatientRequest $request)
     {
+        $personalIdBack = null;
+        $personalIdFront = null;
+        $personalImage = null;
 
+        if($request->hasFile('personal_image')){
         $personalImage = $request->file('personal_image')->getClientOriginalName();
         $request->file('personal_image')->move(public_path('images/personalImage'), $personalImage);
-
+}
+        if($request->hasFile('personal_id_front')){
         $personalIdFront = $request->file('personal_id_front')->getClientOriginalName();
         $request->file('personal_id_front')->move(public_path('images/personalID'), $personalIdFront);
-
+}
+        if($request->hasFile('personal_id_back')){
         $personalIdBack = $request->file('personal_id_back')->getClientOriginalName();
         $request->file('personal_id_back')->move(public_path('images/personalID'), $personalIdBack);
-
+}
         $patient = Patient::create([
             'user_id' => $request->user_id,
             'patient_id' => $request->patient_id,
