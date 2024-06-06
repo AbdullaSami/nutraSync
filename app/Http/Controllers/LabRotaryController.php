@@ -36,12 +36,17 @@ class LabRotaryController extends Controller
      */
     public function store(StoreLabRotaryRequest $request)
     {
+        $labPapers = null;
+        $logo = null ;
+
+        if($request->hasFile('lab_papers')){
         $labPapers = $request->file('lab_papers')->getClientOriginalName();
         $request->file('lab_papers')->move(public_path('images/labPaper'), $labPapers);
-
+        }
+        if($request->hasFile('logo')){
         $logo = $request->file('logo')->getClientOriginalName();
         $request->file('logo')->move(public_path('images/logo'), $logo);
-
+        }
         $labRotary = LabRotary::create([
             'lab_rotary_id' => $request->lab_rotary_id,
             'user_id' => $request->user_id,

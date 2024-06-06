@@ -29,12 +29,16 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
+        $personalImage = null;
+        $doctorPapers = null;
+        if($request->hasFile('personalImage')){
         $personalImage = $request->file('personal_image')->getClientOriginalName();
         $request->file('personal_image')->move(public_path('images/personalImage'), $personalImage);
-
+        }
+        if($request->hasFile('doctorPapers')){
         $doctorPapers = $request->file('doctor_papers')->getClientOriginalName();
         $request->file('doctor_papers')->move(public_path('images/doctorPapers'), $doctorPapers);
-
+        }
         $doctor = Doctor::create([
             'doctor_id' => $request->doctor_id,
             'user_id' => $request->user_id,

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('personal_id')->unique();
             $table->string('license_number');
             $table->string('tax_number');
-            $table->string('doctor_papers');
+            $table->string('doctor_papers')->nullable();
             $table->string('personal_image')->nullable();
             $table->timestamps();
         });

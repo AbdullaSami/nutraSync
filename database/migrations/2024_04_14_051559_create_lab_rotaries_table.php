@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('contact_person');
             $table->string('contact_number');
             $table->string('tax_number');
-            $table->string('lab_papers');
-            $table->string('logo');
+            $table->string('lab_papers')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
