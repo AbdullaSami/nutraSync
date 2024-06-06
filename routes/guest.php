@@ -38,8 +38,12 @@ Route::get('show/doctors', [DoctorController::class, 'show'] );
 Route::get('show/patients', [PatientController::class, 'show'] );
 Route::get('show/labs', [LabRotaryController::class, 'show'] );
 
-//Get the data of one patient the the table
+//Get the data of one patient the table
 Route::get('show/patient/{patient_id}', [PatientController::class, 'showPatient'] );
+//Get the data of one Lab the table
+Route::get('show/lab/{lab_rotary_id}', [LabRotaryController::class, 'showLab'] );
+//Get the data of one Doctor the table
+Route::get('show/doctor/{doctor_id}', [LabRotaryController::class, 'showDoctor'] );
 
 //Get the data of the relations of the three entity's
 Route::get('show/labDoctorPatient', [LabDoctorPatientController::class,'show'] );

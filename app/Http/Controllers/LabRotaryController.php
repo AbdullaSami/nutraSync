@@ -69,6 +69,12 @@ class LabRotaryController extends Controller
         $lab = LabRotary::all();
         return response()->json($lab, 200);
     }
+    public function showLab($lab_rotary_id)
+    {
+        $lab = LabRotary::with('user')->where('lab_rotary_id',$lab_rotary_id)->first();
+
+        return response()->json($lab);
+    }
 
     /**
      * Show the form for editing the specified resource.

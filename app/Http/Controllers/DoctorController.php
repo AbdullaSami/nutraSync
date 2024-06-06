@@ -65,6 +65,13 @@ class DoctorController extends Controller
         $doctor = Doctor::all();
         return response()->json($doctor, 200);
     }
+    public function showDoctor($doctor_id)
+    {
+        $doctor = Doctor::with('user')->where('doctor_id',$doctor_id)->first();
+
+        return response()->json($doctor);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
