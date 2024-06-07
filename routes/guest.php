@@ -43,11 +43,14 @@ Route::get('show/patient/{patient_id}', [PatientController::class, 'showPatient'
 //Get the data of one Lab the table
 Route::get('show/lab/{lab_rotary_id}', [LabRotaryController::class, 'showLab'] );
 //Get the data of one Doctor the table
-Route::get('show/doctor/{doctor_id}', [LabRotaryController::class, 'showDoctor'] );
+Route::get('show/doctor/{doctor_id}', [DoctorController::class, 'showDoctor'] );
 
 //Get the data of the relations of the three entity's
 Route::get('show/labDoctorPatient', [LabDoctorPatientController::class,'show'] );
-
+// Get all the patients of the Lab
+Route::get('show/labPatients/{lab_rotary_id}', [LabDoctorPatientController::class, 'showLabPatients']);
+// Get all the patients of the doctor
+Route::get('show/doctorPatients/{doctor_id}', [LabDoctorPatientController::class, 'showDoctorPatients']);
 //Delete Data
 Route::delete('delete/doctor/{id}', [DoctorController::class,'destroy'] );
 Route::delete('delete/patient/{id}', [PatientController::class,'destroy'] );

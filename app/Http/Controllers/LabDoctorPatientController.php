@@ -26,8 +26,24 @@ class LabDoctorPatientController extends Controller
     }
 
     public function show(LabDoctorPatient $labDoctorPatient){
-        
         $labDoctorPatient = LabDoctorPatient::all();
         return response()->json($labDoctorPatient,200);
+    }
+
+    public function showLabPatients($lab_rotary_id){
+        $labPatients = LabDoctorPatient::get()->where('lab_rotary_id',$lab_rotary_id)->all();
+        $patients = [];
+        foreach($labPatients as $patient){
+            $patients[] = Patient::with('user')->where('patient_id',$patient->patient_id)->first();
+        }
+        return response()->json($patients);
+    }
+    public function showDoctorPatients($doctor_id){
+        $doctorPatients = LabDoctorPatient::get()->where('doctor_id',$doctor_id)->all();
+        $patients = [];
+        foreach($doctorPatients as $patient){
+            $patients[] = Patient::with('user')->where('patient_id',$patient->patient_id)->first();
+        }
+        return response()->json($patients);
     }
 }

@@ -79,7 +79,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        $patient = Patient::all();
+        $patient = Patient::with('user')->get()->all();
         return response()->json($patient,200);
     }
     public function showPatient($patient_id)
